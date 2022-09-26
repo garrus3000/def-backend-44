@@ -1,25 +1,23 @@
-const { productsDao } = require("../../daos");
-const MongoDaoProducts = require("../../daos/mongodb/MongoDaoProducts");
-// const { getAllProducts } = require("../../services/products-services");
+const { productsDao, userDao, cartDao } = require("../../daos");
 
-const productos = new MongoDaoProducts();
 /*
-
-esto no, llamar a new CLASS
+// const MongoDaoProducts = require("../../daos/mongodb/MongoDaoProducts");
+// const productos = new MongoDaoProducts();
 
 const getAllProducts = async () => {
     const prods = await productos.getAll()
     return prods;
 };
 */
+
 const getAllProducts = async () => {
     const prods = await productsDao.getAll()
     return prods;
 };
 
 const getProductById = async ({id: _id}) => {
-    const prods = await productsDao.getById(_id);
-    return prods;
+    const prod = await productsDao.getById(_id);
+    return prod;
 };
 
 const addProduct = async ({input}) => {
@@ -32,16 +30,27 @@ const deleteProductById = async ({id: _id}) => {
     return deletedProd;
 };
 
-const updateProductById = async (_id, {input}) => {
-    console.log(_id)
-    const UdapteProd = await productsDao.updateById({ id: _id }, input )
-    return UdapteProd;
+const updateProductById = async ({ id, input }) => {
+    return productsDao.updateById(id, input);
 };
+
+const getUserByEmail = async (userEmail) => {
+    const {email} = userEmail;
+    const data = await userDao.getByEmail(email);
+    return data[0];
+};
+
+const getUserCartById = async ({id: _id}) => {
+    const userCart = await cartDao.getById(_id)
+    return userCart;
+}
 
 module.exports = {
     getAllProducts,
     getProductById,
     addProduct,
     deleteProductById,
-    updateProductById
+    updateProductById,
+    getUserByEmail,
+    getUserCartById
 };

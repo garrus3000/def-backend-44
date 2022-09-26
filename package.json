@@ -5,15 +5,12 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "test:axios": "node ./test/axios.test.js",
-    "test:mocha": "mocha ./test/mocha.test.js",
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
   "author": "Eduardo Odriozola",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "compression": "^1.7.4",
     "connect-mongo": "^4.6.0",
@@ -37,9 +34,6 @@
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@faker-js/faker": "^7.5.0",
-    "chai": "^4.3.6",
-    "mocha": "^10.0.0",
-    "supertest": "^6.2.4"
+    "@faker-js/faker": "^7.5.0"
   }
 }

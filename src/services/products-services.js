@@ -51,9 +51,10 @@ const putProductById = async (req, res) => {
     const id = req.params.id;
     const exist = await productos.getById(id);
     if (exist !== null) {
-        const { nombre, precio, foto, stock } = req.body;
+        const { nombre, descripcion, precio, foto, stock } = req.body;
         const prod_editado = await productos.updateById((id), {
             nombre,
+            descripcion,
             precio,
             foto,
             stock,

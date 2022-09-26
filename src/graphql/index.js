@@ -13,9 +13,13 @@ const {
     addProduct,
     deleteProductById,
     updateProductById,
+    getUserByEmail,
+    getUserCartById,
 } = require("./resolvers/resolver");
 
-const schemaContenido = fs.readFileSync(path.join(__dirname,'./schemas/productos.gql')).toString();
+const { isAuth } = require('../middlewares/permisos');//user loggeado, que exista session
+
+const schemaContenido = fs.readFileSync(path.join(__dirname,'./schemas/schemas.gql')).toString();
 
 const schema = buildSchema(schemaContenido)
 
@@ -26,13 +30,15 @@ const graphMiddleware = graphqlHTTP({
         getProductById: getProductById,
         addProduct: addProduct,
         deleteProductById: deleteProductById,
-        updateProductById: updateProductById
+        updateProductById: updateProductById,
+        getUserByEmail: getUserByEmail,
+        getUserCartById: getUserCartById
     },
     graphiql: true
 })
 
 const routerGraphql = Router();
 
-routerGraphql.use('/ql', graphMiddleware)
+routerGraphql.use('/graphql', isAuth ,graphMiddleware)
 
 module.exports = routerGraphql;

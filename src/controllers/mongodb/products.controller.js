@@ -18,10 +18,10 @@ routerProductos
     .get( getAllProducts)
     .post( postNewProduct)
 ;
-routerProductos.get('/:id?',  getProductsById);
+routerProductos.get('/:id?', isAuth ,getProductsById);
 
-routerProductos.delete('/:id',  deleteProductById);
+routerProductos.delete('/:id', isAuth, deleteProductById);
 
-routerProductos.put('/:id',  putProductById)
+routerProductos.put('/:id', isAuth, putProductById)
 
 module.exports = routerProductos;

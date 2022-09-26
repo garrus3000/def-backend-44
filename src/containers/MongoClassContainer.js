@@ -48,14 +48,14 @@ class MongoClassContainer {
         }
     };
 
-    updateById = async (id, element) => {
+    updateById = async (id, producto) => {
         try {
-            if (!mongoose.Types.ObjectId.isValid(id)) return null;
-            else return await this.collection.findByIdAndUpdate({ _id: id }, element);
+            const productUpdated = await this.collection.findByIdAndUpdate(id, producto, {new: true});
+            return productUpdated;
         } catch (error) {
             throw new Error(error);
         }
-    };
-}
+    }
+};
 
 module.exports = MongoClassContainer;
